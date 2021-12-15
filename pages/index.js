@@ -9,13 +9,15 @@ import Typography from '@mui/material/Typography';
 import Link from '../components/layout/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
+// redux
 import { useSelector, useDispatch } from 'react-redux'
 import { decrementCount, incrementCount } from '../store/actions/counter';
 
 
 function HomePage() {
   const store = useSelector(store => store)
-  const { counter } = store
+  const { counter=0 } = store
+
   const dispatch = useDispatch()
 
   return (

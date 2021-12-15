@@ -2,7 +2,6 @@ import { combineReducers } from 'redux'
 import userReducer from './users'
 import counterReducer from './counter'
 
-console.log(counterReducer)
 
 // COMBINED REDUCERS
 const reducers = {

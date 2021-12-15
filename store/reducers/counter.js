@@ -1,7 +1,10 @@
 // COUNTER REDUCER
 import { counterTypes as types } from "../types"
+const initState = 0
 
-const counterReducer = (state = 0, { type }) => {
+const counterReducer = (state = initState, action) => {
+    const {type, payload} = action
+    
     switch (type) {
       case types.INCREMENT:
         return state + 1
