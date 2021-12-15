@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
+import { StoreProvider } from '../components/Provider';
 
 import theme from '../conf/them';
 import createEmotionCache from '../createEmotionCache';
@@ -15,6 +16,7 @@ export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   return (
+    <StoreProvider {...pageProps}>
     <CacheProvider value={emotionCache}>
       <Head>
         <title>My page</title>
@@ -26,6 +28,7 @@ export default function MyApp(props) {
         <Component {...pageProps} />
       </ThemeProvider>
     </CacheProvider>
+    </StoreProvider>
   );
 }
 

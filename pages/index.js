@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useEffect} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -14,9 +14,20 @@ import Typography from '@mui/material/Typography';
 import Link from '../components/layout/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
+import { useStore } from '../components/Provider';
+import { observer } from 'mobx-react-lite';
+
+const HomePage = observer((props) => {
+  const store = useStore()
+
+  useEffect(() => {
+    store.start()
+    return () => {
+      store.stop()
+    }
+  }, [store])
 
 
-function HomePage() {
   return (
     <React.Fragment>
       <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
@@ -29,7 +40,7 @@ function HomePage() {
       >
         <Toolbar sx={{ flexWrap: 'wrap' }}>
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-            Next base
+            MobX
           </Typography>
           <nav>
             <Link
@@ -60,14 +71,12 @@ function HomePage() {
           color="text.primary"
           gutterBottom
         >
-          Next baseline
+          {store.timeString}
         </Typography>
       </Container>
      
     </React.Fragment>
   );
-}
+})
 
-export default function rootPage() {
-  return <HomePage />;
-}
+export default HomePage
