@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { List, ListItem, Avatar, ListItemAvatar, ListItemText } from '@mui/material'
 import Layout from '../../components/layout'
 import axios from 'axios';
@@ -6,24 +6,33 @@ import {useRouter} from 'next/router'
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import ArrowForward from '@mui/icons-material/ArrowForward';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUsers, selectUsers } from '../../store/slice/userSlice'; 
 
-export const getStaticProps = async () => {
-    const req =  await axios.get('http://localhost:3000/api/users')
+// export const getStaticProps = async () => {
+//     const req =  await axios.get('http://localhost:3000/api/users')
     
-    if (req.status >= 400 || !req.data) {
-        return {notFound: true}
-    }
+//     if (req.status >= 400 || !req.data) {
+//         return {notFound: true}
+//     }
 
-    return {
-        props: {
-            users: req.data
-        }
-    }
-}
+//     return {
+//         props: {
+//             users: req.data
+//         }
+//     }
+// }
 
 export default function Users(data) {
-     const [users, setUsers] = useState(data.users)
+     //const [users, setUsers] = useState(data.users)
      const router = useRouter()
+     const dispatch = useDispatch()
+     const users = useSelector(selectUsers)
+
+    useEffect(() => {
+        dispatch(fetchUsers())
+    }, [dispatch])
+    
 
     const handleClickUser = (uid) => {
         router.push(`http://localhost:3000/users/${uid}`)
