@@ -8,7 +8,7 @@ const initialState = {
 }
 
 export const fetchUsers = createAsyncThunk(
-    'fetchUsers',
+    'users/fetchUsers',
     async () => {
         const response = await axios.get('http://localhost:3000/api/users');
       return response.data
@@ -22,16 +22,16 @@ export const userSlice = createSlice({
         addUser: (state, {payload}) => {
             return [...state, payload]
         }},
-        extraReducers: (builder) => {
-            builder
-              .addCase(fetchUsers.pending, (state) => {
-                state.isLoading = true
-              })
-              .addCase(fetchUsers.fulfilled, (state, action) => {
-                state.isLoading = false
-                state.list = [...action.payload]
-              })
-          },
+    extraReducers: (builder) => {
+        builder
+          .addCase(fetchUsers.pending, (state) => {
+            state.isLoading = true
+          })
+          .addCase(fetchUsers.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.list = [...action.payload]
+          })
+      },
     }
 )
 
