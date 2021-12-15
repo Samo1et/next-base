@@ -31,7 +31,7 @@ export default function User(props) {
             <Box
                 component="form"
                 sx={{
-                    '& > :not(style)': { m: 3, width: '25ch' },
+                    '& > :not(style)': { m: 3, width: '35ch' },
                 }}
                 noValidate
                 autoComplete="off"
