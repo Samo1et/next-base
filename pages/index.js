@@ -6,9 +6,9 @@ import Typography from '@mui/material/Typography';
 import Link from '../components/layout/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
+
 // GQL
 import { useQuery } from '@apollo/client'
-import { initializeApollo } from '../apollo/client'
 import gql from 'graphql-tag'
 
 const UsersQuery = gql`
@@ -16,27 +16,52 @@ const UsersQuery = gql`
     users {
       id
       name
+      username
       email
+      address {
+        street
+        geo {
+          lat
+        }
+
+      }
     }
     user(username: $username) {
       id
       username
       email
     }
-    # addUser(name: "New User", email: "email") {
-    #   user {
-    #     name
-    #     email
-    #   }
-    # }
+
+    addUser(name: "New User", email: "email") {
+      user {
+        name
+        email
+      }
+    }
   }
 `
+
+// "id": 1,
+// "name": "Leanne Graham",
+// "username": "Bret",
+// "email": "Sincere@april.biz",
+// "password" : "Sincere@april.biz",
+// "address": {
+//   "street": "Kulas Light",
+//   "suite": "Apt. 556",
+//   "city": "Gwenborough",
+//   "zipcode": "92998-3874",
+//   "geo": {
+//     "lat": "-37.3159",
+//     "lng": "81.1496"
+//   }
+// },
 
 
 function HomePage() {
   const { data } = useQuery(UsersQuery, {
     variables: {
-      username: "Bret"
+      username: 'Bret'
     }
   })
   console.log(data)

@@ -4,6 +4,12 @@ import Layout from '../../components/layout'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Paper } from '@mui/material';
+import { useRouter } from 'next/router';
+
+// GQL
+import { useQuery } from '@apollo/client'
+import gql from 'graphql-tag'
+import { ConstructionOutlined } from '@mui/icons-material';
 
 export const getServerSideProps = async (context) => {
     const uid = context.params.uid
@@ -22,8 +28,35 @@ export const getServerSideProps = async (context) => {
     }
 }
 
+const UsersQuery = gql`
+  query UsersQueryOnUserPage($id: ID) {
+    userById(id: $id) {
+      id
+      name
+      username
+      email
+      address {
+        street
+        geo {
+          lat
+        }
+
+      }
+    }
+  }
+`
+
 export default function User(props) {
     const { name, username, email, phone, website, company } = props.user
+    const router = useRouter()
+    console.log(router.query.uid)
+
+    const {data} = useQuery(UsersQuery, {
+        variables: {
+            id: router.query.uid
+        }
+    })
+    console.log(data)
 
     return (
         <Layout title={name}>

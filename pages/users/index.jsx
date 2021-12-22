@@ -7,7 +7,7 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import ArrowForward from '@mui/icons-material/ArrowForward';
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
     const req =  await axios.get('http://localhost:3000/api/users')
     
     if (req.status >= 400 || !req.data) {

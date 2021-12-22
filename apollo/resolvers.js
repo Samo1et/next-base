@@ -9,17 +9,19 @@ export const resolvers = {
         },
         user(_parent, { username }) {
           return users.find((user) => user.username === username)
+        },
+        userById(_parent, { id }) {
+            return users.find((user) => parseInt(user.id) === parseInt(id))
         }
       },
     Mutation: {
         async addUser(_arent, args) {
             const id = users.length + 1;
-            users.push({
+            return users.push({
                 id,
-                name: user.name, 
-                email: user.email
+                name: args.user.name, 
+                email: args.user.email
             })
-            return users.find((user) => parseInt(user.id) === parseInt(id))
         }
     }
   }

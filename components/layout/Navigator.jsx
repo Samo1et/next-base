@@ -29,7 +29,7 @@ const categories = [
         active: true,
         href: '/users'
       },
-      { id: 'Database', icon: <DnsRoundedIcon /> },
+      { id: 'База данных', icon: <DnsRoundedIcon /> },
       { id: 'Storage', icon: <PermMediaOutlinedIcon /> },
       { id: 'Hosting', icon: <PublicIcon /> },
       { id: 'Functions', icon: <SettingsEthernetIcon /> },

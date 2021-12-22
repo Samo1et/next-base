@@ -4,6 +4,7 @@ export const typeDefs = gql`
   type Query {
     users: [User!]!
     user(username: String): User
+    userById(id: ID): User
   }
   type User {
     id: ID!,
@@ -31,7 +32,7 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    addUser(user: UserInput!): ID!
+    addUser(user: UserInput!): Boolean!
   }
 `
 
