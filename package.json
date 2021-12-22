@@ -6,7 +6,9 @@
     "build": "next build",
     "stnpm rn devart": "next start",
     "lint": "next lint",
-    "clean": "next clean"
+    "clean": "next clean",
+    "test": "jest --watch",
+    "analyze": "cross-env ANALYZE=true yarn build"
   },
   "dependencies": {
     "@emotion/cache": "^11.6.0",
@@ -15,8 +17,10 @@
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.2.1",
     "@mui/material": "^5.2.3",
+    "@next/bundle-analyzer": "^9.1.4",
     "axios": "^0.24.0",
     "clsx": "^1.1.1",
+    "cross-env": "^6.0.3",
     "next": "12.0.4",
     "prop-types": "^15.7.2",
     "react": "17.0.2",
@@ -24,7 +28,14 @@
     "sass": "^1.44.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "5.16.1",
+    "@testing-library/react": "12.1.2",
+    "@testing-library/user-event": "13.5.0",
+    "babel-jest": "27.4.5",
     "eslint": "7.32.0",
-    "eslint-config-next": "12.0.4"
+    "eslint-config-next": "12.0.4",
+    "eslint-plugin-testing-library": "5.0.1",
+    "jest": "^27.4.5",
+    "serve": "^11.3.2"
   }
 }
