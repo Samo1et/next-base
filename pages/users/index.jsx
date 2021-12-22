@@ -53,7 +53,6 @@ export default function Users(data) {
                     <Divider variant="inset" component="li" />
                     </>
                     ))}
-
                 </List>
             }
         </Layout>
