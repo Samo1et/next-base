@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios'
+import {set} from 'lodash'
 
 const initialState = {
-    list: [],
+    list: null,
     isLoading: false,
     hasError: null
 }
@@ -21,7 +22,17 @@ export const userSlice = createSlice({
     reducers: {
         addUser: (state, {payload}) => {
             return [...state, payload]
-        }},
+        },
+        updateUserName: (state, {payload}) => {
+          const {name, uid} = payload;
+          const updatedUsers = state.list.map(user => {
+            if (+user.id === +uid) {
+              user.name = name
+            }
+            return user
+          })
+        }
+      },
     extraReducers: (builder) => {
         builder
           .addCase(fetchUsers.pending, (state) => {
@@ -35,6 +46,6 @@ export const userSlice = createSlice({
     }
 )
 
-export const { addUser } = userSlice.actions
+export const { addUser, updateUserName } = userSlice.actions
 export const selectUsers = (state) => state.users.list
 export default userSlice.reducer

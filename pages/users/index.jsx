@@ -30,7 +30,10 @@ export default function Users(data) {
      const users = useSelector(selectUsers)
 
     useEffect(() => {
-        dispatch(fetchUsers())
+        if (!users) {
+            dispatch(fetchUsers()) 
+        }
+
     }, [dispatch])
     
 
